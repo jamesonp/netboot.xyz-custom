@@ -1,12 +1,22 @@
 #!ipxe
 ###
-### netboot.xyz-custom menu
-###
 
-:start
-echo Hello world!
-sleep 10
+:custom
+clear custom_choice
+menu Jameson's Menu
+item --gap Utilities
+item option_one ${space} Clonezilla w/NTFS-FS1
+choose custom_choice || goto custom_exit
+echo ${cls}
+goto ${custom_choice}
 goto custom_exit
 
+:option_one
+kernel http://pxe.internal.jamesonp.com/clonezilla/vmlinuz
+initrd http://pxe.internal.jamesonp.com/clonezilla/initrd
+APPEND initrd=initrd.img boot=live username=user union=overlay config components quiet noswap edd=on nomodeset nodmraid locales= keyboard-layouts= ocs_live_run="ocs-live-general" ocs_live_extra_param="" ocs_live_batch=no ocs_repository="nfs4://pxe.internal.jamesonp.com/clonezilla" net.ifnames=0 nosplash noprompt fetch=tftp://$serverIP/clonezilla/filesystem.squashfs
+boot || goto custom_exit
+
 :custom_exit
-exit 0
+chain utils.ipxe
+exit
