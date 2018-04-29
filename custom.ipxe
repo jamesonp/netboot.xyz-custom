@@ -5,16 +5,23 @@
 clear custom_choice
 menu Jameson's Menu
 item --gap Utilities
-item option_one ${space} Clonezilla w/NTFS-FS1
+item option_one ${space} Clonezilla x64 w/NTFS-FS1
+item option_two ${space} Clonezilla i386 w/NTFS-FS1
 choose custom_choice || goto custom_exit
 echo ${cls}
 goto ${custom_choice}
 goto custom_exit
 
 :option_one
-kernel http://pxe.internal.jamesonp.com/clonezilla/vmlinuz
-initrd http://pxe.internal.jamesonp.com/clonezilla/initrd
-imgargs vmlinuz boot=live live-config noswap nolocales edd=on nomodeset ocs_live_run="ocs-live-general" ocs_lang="en_US.UTF-8" ocs_live_keymap="/usr/share/keymaps/i386/qwertz/de-latin1-nodeadkeys.kmap.gz" vga=788 nosplash fetch=http://pxe.internal.jamesonp.com/clonezilla/filesystem.squashfs
+kernel http://pxe.internal.jamesonp.com/clonezilla/clonezilla_64/vmlinuz
+initrd http://pxe.internal.jamesonp.com/clonezilla/clonezilla_64/initrd
+imgargs vmlinuz boot=live live-config noswap nolocales edd=on nomodeset ocs_live_run="ocs-live-general" ocs_lang="en_US.UTF-8" ocs_live_keymap="/usr/share/keymaps/i386/qwertz/de-latin1-nodeadkeys.kmap.gz" vga=788 nosplash fetch=http://pxe.internal.jamesonp.com/clonezilla/clonezilla_64/filesystem.squashfs
+boot || goto custom_exit
+
+:option_two
+kernel http://pxe.internal.jamesonp.com/clonezilla/clonezilla_i386/vmlinuz
+initrd http://pxe.internal.jamesonp.com/clonezilla/clonezilla_i386/initrd
+imgargs vmlinuz boot=live live-config noswap nolocales edd=on nomodeset ocs_live_run="ocs-live-general" ocs_lang="en_US.UTF-8" ocs_live_keymap="/usr/share/keymaps/i386/qwertz/de-latin1-nodeadkeys.kmap.gz" vga=788 nosplash fetch=http://pxe.internal.jamesonp.com/clonezilla/clonezilla_i386/filesystem.squashfs
 boot || goto custom_exit
 
 :custom_exit
