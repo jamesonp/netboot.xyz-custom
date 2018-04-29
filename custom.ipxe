@@ -13,7 +13,7 @@ goto custom_exit
 
 :option_one
 kernel http://pxe.internal.jamesonp.com/clonezilla/vmlinuz boot=live username=user union=overlay config components quiet noswap edd=on nomodeset nodmraid locales= keyboard-layouts= ocs_live_run="ocs-live-general" ocs_live_extra_param="" ocs_live_batch=no ocs_repository="nfs4://pxe.internal.jamesonp.com/clonezilla" net.ifnames=0 nosplash noprompt fetch=tftp://pxe.internal.jamesonp.com/clonezilla/filesystem.squashfs
-initrd http://pxe.internal.jamesonp.com/clonezilla/initrd.img
+initrd http://pxe.internal.jamesonp.com/clonezilla/initrd
 boot || goto custom_exit
 
 :custom_exit
